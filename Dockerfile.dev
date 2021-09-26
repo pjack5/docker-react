@@ -1,0 +1,16 @@
+FROM node:alpine
+
+WORKDIR /app
+
+#copy over the package.json since it is a dependency of the npm install first
+# if you copy . . before the npm install runs, any time you change a file that
+# npm install isn't dependent on, it's not going to use that cached step from the 
+#last build and will take longer. 
+
+COPY ./package.json /app
+
+RUN npm install
+
+COPY . .
+
+CMD ["npm", "run", "start"]
