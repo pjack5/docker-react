@@ -1,0 +1,19 @@
+#require sudo permissions to execute build
+language: generic
+sudo: required
+#need docker cli pre-installed. this will install a copy of docker in our running container. 
+services:
+  - docker
+
+#installs before our tests are run, set up that occurs before a project is deployed or tests run
+#for us we want to build the docker image first
+#tag it because no easy way to grab image id through travis
+before_install:
+  - docker build -t silencerx21/docker-react -f Dockerfile.dev . 
+
+#contains the commands necessary to run our test suite
+#overrun default command from the dockerfile (npm run start) with npm run test
+# - e CI=true prevents the npm run test from running forever, 
+# it exits after all test suites run successfully
+script:
+  - docker run -e CI=true silencerx21/docker-react npm run test 
