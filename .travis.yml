@@ -15,5 +15,6 @@ before_install:
 #overrun default command from the dockerfile (npm run start) with npm run test
 # - e CI=true prevents the npm run test from running forever, 
 # it exits after all test suites run successfully
-#script:
+script:
+   - docker run silencerx21/docker-react
 #  - docker run -e CI=true silencerx21/docker-react npm run test 
