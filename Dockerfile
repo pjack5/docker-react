@@ -17,4 +17,5 @@ FROM nginx
 COPY --from=builder /app/build /usr/share/nginx/html
 
 #default command of nginx container starts it so we don't need a CMD
+##
 
