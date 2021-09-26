@@ -16,7 +16,23 @@ before_install:
 # - e CI=true prevents the npm run test from running forever, 
 # it exits after all test suites run successfully
 script:
-  - docker run -p 127.0.0.1:3000:3000 silencerx21/docker-react 
-# - docker run -e CI=true silencerx21/docker-react npm run test 
+  - docker run -e CI=true silencerx21/docker-react npm run test 
+#  - docker run -p 3000:3000 silencerx21/docker-react 
+#  tried to get the development server to run with below. Did not work. prbly port mapping problem. 
 
-# tried to get the development server to run with below. Did not work. prbly port mapping problem. 
+deploy: 
+  #cloud provider and amazon region 
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  #app and environment name
+  app: "docker-react"
+  env: "Dockerreact-env"
+  #name and path of the s3 bucket that elastic beanstalk set up
+  bucket_name: elasticbeanstalk-us-east-1-638852171429
+  bucket_path: "docker-react"
+  #deploy when code is pushed to the master branch
+  on: 
+    branch: master
+
+access_key_id: $AWS_ACCESS_KEY
+secret_access_key: $AWS_SECRET_KEY
