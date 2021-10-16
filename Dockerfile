@@ -12,6 +12,10 @@ RUN npm run build
 
 #having a second FROM statement basically terminates the previous block
 FROM nginx
+
+#for elastic beanstalk, it uses that as the port that gets mapped
+#for incoming traffic
+EXPOSE 80
 #this basically dumps everything from the node alpine image and the npm install, just get the result of
 #the /app/build directory
 COPY --from=builder /app/build /usr/share/nginx/html
