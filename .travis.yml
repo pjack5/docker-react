@@ -27,12 +27,15 @@ deploy:
   #app and environment name
   app: "docker-react"
   env: "Dockerreact-env"
-  #name and path of the s3 bucket that elastic beanstalk set up
+  #name and path of the s3 bucket that elastic beanstalk set up. Travis-CI is going to package up all
+  #files from the github repository we're using, zip them up, and send them to this S3 bucket
   bucket_name: elasticbeanstalk-us-east-1-638852171429
   bucket_path: "docker-react"
   #deploy when code is pushed to the master branch
   on: 
     branch: master
 
+  #keys generated from IAM in AWS. Keys were given a name and added in the settings for the
+  #docker-react project in the Travis-CI UI. 
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
